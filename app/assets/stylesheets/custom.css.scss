@@ -8,6 +8,18 @@ h1{
 	text-align: center;
 }
 
-textarea{
+#post_content{
 	height: 400px !important;
+}
+
+
+.select {
+    background-color: yellow;
+}
+
+.post-content span::selection {
+  background: yellow; /* WebKit/Blink Browsers */
+}
+.post-content span::-moz-selection {
+  background: yellow; /* Gecko Browsers */
 }

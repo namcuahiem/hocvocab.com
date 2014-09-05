@@ -1,0 +1,26 @@
+<% if @translations.nil? %>
+	<h1>About us</h1>
+	<i>A network that not only can help you gain vocabulary through at-level lessons, but also be a place where you can meet people with the same interest.</i>
+<% else %>
+	<h1>Translation<span class='badge'><%= @translations.size %></span></h1>
+	<li id="selectword" class="list-group-item active">
+		<h4 class="list-group-item-heading">Recent Comments</h4>
+	</li>
+	<ul  class="list-group" id='getmeaning'>
+		<% @translations.each do |t|%>
+			<li class="list-group-item"><%= t.words %> (<%= t.start %>-<%= t.end %>) : <%= t.meaning %> <i>by <%= t.user.username %> in <%= t.post.title %></i> </li>
+		<% end %>
+	</ul>
+	<li class="list-group-item" id="yourtranslation">
+		<% if !@translation.nil? %>
+			<%= form_for(@translation) do |f| %>
+				<%= f.hidden_field :start %>
+				<%= f.hidden_field :end %>
+				<%= f.hidden_field :words %>
+				<%= f.hidden_field :post_id, value: @post.id %>
+				<%= f.text_field :meaning, placeholder:"Your translation" %>
+				<%= f.submit "Comment" %>
+			<% end %>
+		<% end %>
+	</li>
+<% end %>

@@ -29,6 +29,14 @@
     <%= f.password_field :password_confirmation, autocomplete: "off", class: "form-control" %>
   </div>
 
+  <% if current_user.image.exists? %>
+    <%= image_tag current_user.image.url, class: "img-circle" %>
+  <% end %>
+  <div class="form-group">
+    <%= f.label :image, "Your Avatar" %>
+    <%= f.file_field :image, autocomplete: "off", class: "form-control" %>
+  </div>
+
   <div class="form-group">
     <%= f.label :current_password %> <i class="text-success">(we need your current password to confirm your changes)</i><br />
     <%= f.password_field :current_password, autocomplete: "off", class: "form-control" %>

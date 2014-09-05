@@ -5,6 +5,7 @@ class Post < ActiveRecord::Base
 	belongs_to :user
 	has_many :taggings
 	has_many :tags, through: :taggings
+	has_many :translations
 
 	#getter
 	def tag_list

@@ -9,6 +9,8 @@ class PostsController < ApplicationController
   def show
   	@post = Post.find(params[:id])
     @user = @post.user
+    @translations = @post.translations
+    @translation = Translation.new
   end
 
   def new
@@ -16,7 +18,8 @@ class PostsController < ApplicationController
   end
 
   def create
-    @post = current_user.posts.create(post_params)
+    @post = current_user.posts.new(post_params)
+    @post.content = to_html(post_params[:content])
     if @post.save
       flash[:success] = "Post succesfully"
       redirect_to @post
@@ -42,4 +45,15 @@ class PostsController < ApplicationController
     end
 end
 
+def to_html(content)
+  #sanitize: remove script from html
+  content = content.gsub(/(<.*?>)/, '')
+  #convert newline to br tag
+  content = content.gsub(/\n/, '<br/>').html_safe
+  #convert to span text
+  id=0
+  content = content.split(' ').collect do |word| 
+    "<span class='word' id='w" +"#{id=id+1}"+"'>"+word+"</span>"+"<span class='word' id='w" +"#{id=id+1}"+"'> </span>"
+  end.join('')
+end
 

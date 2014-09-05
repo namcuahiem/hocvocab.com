@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140902185643) do
+ActiveRecord::Schema.define(version: 20140904052008) do
 
   create_table "posts", force: true do |t|
     t.string   "title"
@@ -37,6 +37,20 @@ ActiveRecord::Schema.define(version: 20140902185643) do
     t.datetime "updated_at"
   end
 
+  create_table "translations", force: true do |t|
+    t.integer  "post_id"
+    t.integer  "user_id"
+    t.integer  "start"
+    t.integer  "end"
+    t.string   "words"
+    t.string   "meaning"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "translations", ["post_id"], name: "index_translations_on_post_id"
+  add_index "translations", ["user_id"], name: "index_translations_on_user_id"
+
   create_table "users", force: true do |t|
     t.string   "username",               default: "", null: false
     t.string   "email",                  default: "", null: false
@@ -51,6 +65,10 @@ ActiveRecord::Schema.define(version: 20140902185643) do
     t.string   "last_sign_in_ip"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "image_file_name"
+    t.string   "image_content_type"
+    t.integer  "image_file_size"
+    t.datetime "image_updated_at"
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true

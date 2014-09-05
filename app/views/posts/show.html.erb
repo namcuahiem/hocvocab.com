@@ -1,6 +1,11 @@
 <h1><%= @post.title %></h1>
-<%= @post.content %>
-<p>posted by <b><%= @user.username %></b></p>
+<div class="post-content">
+	<%= raw @post.content %>
+</div>
+<br/>
+<p>Author: <b><%= @user.username %></b></p>
 <div>
 	<b>Tags: </b> <%= @post.tag_list %>
 </div>
+<br>
+<br>

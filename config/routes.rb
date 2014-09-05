@@ -1,7 +1,14 @@
 Rails.application.routes.draw do
+  get 'translations/index'
+
   devise_for :users
-  resources :posts
+  resources :posts do
+    get 'translation' => 'translations#get'
+  end
+
   root "posts#index"
+
+  resources :translations
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
